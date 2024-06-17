@@ -28,7 +28,9 @@
 \ProcessOptions\relax
 
 %% Load base (force chapters to always start on the right-hand page)
-\LoadClass[11pt,letterpaper,twoside]{report} % ,openright
+\LoadClass[11pt,a4paper,twoside]{report} % ,openright
+%\LoadClass[11pt,a4paper, openright, twoside]{book}
+
 
 %----------------------------------------------------------------------%
 %                 Numbering table of contents
@@ -471,7 +473,6 @@
 
 \newcommand\thesisTitle{
     {
-    %\newpage
     \thispagestyle{empty}% Doesn't count in table of contents
     \begin{minipage}[c]{\textwidth}
     %\chapter*{\color{BLACK}\uppercase{\@title}} % This doesn't work
@@ -500,6 +501,7 @@
         \end{spacing}
     \end{minipage}
     \clearpage
+    \thispagestyle{empty}
     }
 }
 
@@ -510,21 +512,22 @@
 \def\copyrightyear#1{\gdef\@copyrightyear{#1}} % Copyright year
 
 \newcommand\copyrightpage{
-    {\newpage
-    \thispagestyle{empty}% Doesn't count in table of contents
-    %\phantomsection
-    %\pdfbookmark{Copyright year}{toc} % Add bookmark to PDF
-    \topskip0pt
-    \vspace*{\fill}
-    \noindent
-    \begin{minipage}[c]{\textwidth}%
-        \centering
-        Copyright \copyright\ \@author\ \@copyrightyear \\
-        \skiplines{1} % university requirement
-        All Rights Reserved
-    \end{minipage}%
-    \vspace*{\fill}
-    \newpage% Added 1995 by GBG; see Eric Eide notes.
+    \cleardoublepage % Página en blanco antes de la página de derechos de autor (lado derecho)
+    \thispagestyle{empty} % Sin numeración ni encabezado en la página de derechos de autor
+    
+    {\newpage % Nueva página para la página de derechos de autor
+        \topskip0pt
+        \vspace*{\fill}
+        \noindent
+        \begin{minipage}[c]{\textwidth}%
+            \centering
+            Copyright \copyright\ \@author\ \@copyrightyear \\
+            \skiplines{1} % Espacio vertical adicional (requisito universitario)
+            All Rights Reserved
+        \end{minipage}%
+        \vspace*{\fill}
+        \clearpage
+        \thispagestyle{empty}
     }
 }
 
@@ -562,16 +565,15 @@
 \RequirePackage{ragged2e} % Allows for justification of sections
 
 \long \def \dissertationapproval{%
-    \newpage
-    %
-    \thispagestyle{empty}% Doesn't count in table of contents
+
+    \cleardoublepage % Página en blanco antes de la página de derechos de autor (lado derecho)
     %\phantomsection
     %\pdfbookmark{Dissertation Approval}{toc} % Add bookmark to PDF
     \vspace*{\fill}
     \noindent
     \begin{minipage}[c]{\textwidth}
         \centering
-        \textbf{\Large The University of Utah Graduate School} \\
+        \textbf{\Large Polythecnic University of Catalonia - Barcelona Tech} \\
         \skiplines{2} % university requirement
         \textbf{\Large STATEMENT OF \ifthenelse{\equal{\@thesistype}{thesis}}{THESIS}{DISSERTATION}\ APPROVAL}
         \skiplines{2} % university requirement
@@ -610,27 +612,47 @@
         \end{doublespace}
     \end{minipage}
     \vspace*{\fill}
+    \clearpage
+    \thispagestyle{empty}
 }
 
 %----------------------------------------------------------------------%
 %                              Abstract
 %----------------------------------------------------------------------%
-\def\abstractString#1{\gdef\@abstractString{#1}} % Abstract
+	\def\abstractString#1{\gdef\@abstractString{#1}} % Abstract
+	
+	\newcommand\abstractPage{
+	    \cleardoublepage
+	    % \thispagestyle{empty}       % blank page to have the abstract start on page 3 (right side)
+	    {%\newpage
+	    \chapter*{Abstract}
+	        % manually set to page iii (University requirement)
+	        % \setcounter{page}{3}
+	        \addcontentsline{toc}{chapter}{\uppercase{Abstract}}
+	        \hspace{\parindent}
+	        \begin{doublespace}
+	            \@abstractString
+	        \end{doublespace}
+	    }
+	    \clearpage
+	    \thispagestyle{empty}
+	}
 
-\newcommand\abstractPage{
-    \newpage                    % blank page to have the abstract start on page 3 (right side)
-    \thispagestyle{empty}       % blank page to have the abstract start on page 3 (right side)
-    {\newpage
-    \chapter*{Abstract}
-        % manually set to page iii (University requirement)
-        \setcounter{page}{3}
-        \addcontentsline{toc}{chapter}{\uppercase{Abstract}}
-        \hspace{\parindent}
-        \begin{doublespace}
-            \@abstractString
-        \end{doublespace}
-    }
-}
+% \def\abstractString#1{\gdef\@abstractString{#1}} % Abstract
+
+% \newcommand\abstractPage{
+%     \cleardoublepage % Asegura que el abstract comienza en una página impar
+%     \chapter*{Abstract}
+%     % manualmente configurar el contador de página a iii (requisito de la universidad)
+%     % \setcounter{page}{3}
+%     \addcontentsline{toc}{chapter}{\uppercase{Abstract}}
+%     \begin{doublespace}
+%         \@abstractString
+%     \end{doublespace}
+%     % \cleardoublepage % Asegura que la siguiente sección también comienza en una página impar
+%     \clearpage
+%     \thispagestyle{empty}
+% }
 
 
 %----------------------------------------------------------------------%
@@ -638,22 +660,25 @@
 %----------------------------------------------------------------------%
 \def\dedication#1{\gdef\@dedication{#1}} % Dedication
 
-\newcommand\dedicationPage{
-    {\newpage
-        % Don't include in page count
-        \clearpage\thispagestyle{empty}\addtocounter{page}{-1} 
-        \topskip0pt
-        \vspace*{\fill}
-        \noindent
-        \begin{minipage}[c]{.95\textwidth}%
-            \centering
-            \begin{doublespace}
-                \@dedication
-            \end{doublespace}
-        \end{minipage}%
-        \vspace*{\fill}
-    }
-}
+ \newcommand\dedicationPage{
+    \cleardoublepage % Página en blanco antes de la dedicatoria (lado derecho)
+     {\newpage
+         % Don't include in page count
+         % \clearpage\thispagestyle{empty}\addtocounter{page}{-1} 
+         \topskip0pt
+         \vspace*{\fill}
+         \noindent
+         \begin{minipage}[c]{.95\textwidth}%
+             \centering
+             \begin{doublespace}
+                 \@dedication
+             \end{doublespace}
+         \end{minipage}%
+         \vspace*{\fill}
+   \clearpage
+   \thispagestyle{empty}
+     }
+ }
 
 %----------------------------------------------------------------------%
 %                           Frontispiece page
@@ -661,9 +686,10 @@
 \def\frontispiece#1{\gdef\@frontispiece{#1}} % Frontispiece
 
 \newcommand\frontispiecePage{
+    \cleardoublepage % Página en blanco antes de la página de derechos de autor (lado derecho)
     {\newpage        
         % Don't display the page number but still add to the total count
-        \clearpage\thispagestyle{empty}
+        % \clearpage\thispagestyle{empty}
         \topskip0pt
         \vspace*{\fill}
         \noindent
@@ -672,6 +698,8 @@
             \includegraphics[width=\textwidth]{{\@frontispiece}}
         \end{minipage}%
         \vspace*{\fill}
+	\clearpage
+	\thispagestyle{empty}
     }
 }
 
@@ -685,36 +713,20 @@
 
 %\setlength{\epigraphwidth}{0.6\textwidth} % Width of epigraph
 
-\newcommand\epigraphPage{
-    {\newpage
-        % Don't display the page number but still add to the total count    
-        \clearpage\thispagestyle{empty}
-        \topskip0pt
-        \vspace*{\fill}
-        \noindent
-        \begin{minipage}[c]{\textwidth}%
-            \centering
-            \epigraph{\Large{\@epigraphQuote}}{---{\@epigraphAuthor}}
-        \end{minipage}%
-        \vspace*{\fill}
-    }
-}
-
-
-%----------------------------------------------------------------------%
-%                       Acknowledgements page
-%----------------------------------------------------------------------%
-\def\Acknowledgement#1{\gdef\@Acknowledgement{#1}} % Acknowledgement
-
-\newcommand\AcknowledgementPage{
-    {
-    \chapter*{Acknowledgements}
-    \addcontentsline{toc}{chapter}{\uppercase{Acknowledgements}}
-    \hspace{\parindent}
-    \begin{doublespace}
-        \@Acknowledgement
-    \end{doublespace}
-    }
+\newcommand{\epigraphPage}{
+    \cleardoublepage % Página en blanco antes de la página de epígrafe (lado derecho)
+    \thispagestyle{empty} % Sin numeración ni encabezado en la página de epígrafe
+    
+    \topskip0pt
+    \vspace*{\fill}
+    \noindent
+    \begin{minipage}[c]{\textwidth}%
+        \centering
+        \epigraph{\Large{\@epigraphQuote}}{---{\@epigraphAuthor}}
+    \end{minipage}%
+    \vspace*{\fill}
+    \clearpage
+    \thispagestyle{empty}
 }
 
 
@@ -723,97 +735,195 @@
 %----------------------------------------------------------------------%
 \def\NotationAndSymbols#1{\gdef\@NotationAndSymbols{#1}} % Notation and Symbols
 
+
 \newcommand\NotationSymbolsPage{
+    % \cleardoublepage % Página en blanco antes de la página de Notation and Symbols (lado derecho)
     {
-    \chapter*{Notation and Symbols}
-        \addcontentsline{toc}{chapter}{\uppercase{Notation and Symbols}}
-        \begin{center}
-            \@NotationAndSymbols
-        \end{center}
+    \chapter*{List of Abbreviations and Symbols}
+    \addcontentsline{toc}{chapter}{\uppercase{List of Abbreviations and Symbols}}
+    \begin{center}
+        \@NotationAndSymbols
+    \end{center}
     }
+    \vspace*{\fill}
+    \clearpage
+    \thispagestyle{empty}
+
 }
+
+
+
+%----------------------------------------------------------------------%
+%                       Acknowledgements page
+%----------------------------------------------------------------------%
+\def\Acknowledgement#1{\gdef\@Acknowledgement{#1}} % Acknowledgement
+
+\newcommand\AcknowledgementPage{
+
+    % \thispagestyle{fancy} % Sin numeración ni encabezado en la página de derechos de autor
+    % \cleardoublepage % Página en blanco antes de la página de derechos de autor (lado derecho)
+    {
+    % \thispagestyle{empty} % Sin numeración ni encabezado en la página de derechos de autor
+    \chapter*{Acknowledgements}
+    \addcontentsline{toc}{chapter}{\uppercase{Acknowledgements}}
+    \hspace{\parindent}
+        \@Acknowledgement
+    \end{doublespace}
+    }
+    \newpage
+    \thispagestyle{empty}
+
+}
+
+
+
 
 
 %----------------------------------------------------------------------%
 %                      List of Abbreviations Page
 %----------------------------------------------------------------------%
-\def\ListOfAbbreviations#1{\gdef\@ListOfAbbreviations{#1}} % List of Abbreviations
+% \def\ListOfAbbreviations#1{\gdef\@ListOfAbbreviations{#1}} % List of Abbreviations
 
-\newcommand\AbbreviationsPage{
-    {
-    \chapter*{List of Abbreviations}
-        \addcontentsline{toc}{chapter}{\uppercase{List of Abbreviations}}
-        \begin{center}
-            \@ListOfAbbreviations
-        \end{center}
-    }
-}
+% \newcommand\AbbreviationsPage{
+%     \cleardoublepage % Página en blanco antes de la página de derechos de autor (lado derecho)
+%     \thispagestyle{empty} % Sin numeración ni encabezado en la página de derechos de autor
+%     {
+%     \chapter*{List of Abbreviations}
+%         \addcontentsline{toc}{chapter}{\uppercase{List of Abbreviations}}
+%         \begin{center}
+%             \@ListOfAbbreviations
+%         \end{center}
+%     }
+% }
 
 
 %----------------------------------------------------------------------%
-%              Specify frontmatter, mainmatter, and backmatter
+%              Specify frontMatter, mainmatter, and backMatter
 %----------------------------------------------------------------------%
 
 \RequirePackage{fancyhdr}
 
 \newcommand\frontMatter{%
-    \hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
+\hypersetup{bookmarksdepth=5} % Mostrar marcadores en el PDF
     
-    \cleardoublepage
-    \pagenumbering{roman}
+    \cleardoublepage % Página en blanco antes de la página de derechos de autor (lado derecho)
+    \thispagestyle{empty} % Sin numeración ni encabezado en la página de derechos de autor
+    \pagenumbering{roman} % Numeración romana para páginas preliminares
     
-    % Redefine the pagestyle plain because when \chapter{...} is evoked, 
-    % it ignores the current page style
+    % Redefinir el estilo de página plain para páginas preliminares
     \fancypagestyle{plain}{%
       \renewcommand{\headrulewidth}{0pt}%
-      \fancyhf{} % University requirement that pages with chapter titles don't show numbers
-      %\fancyhead[R]{\thepage} % Uncomment to put page numbers on chapter title page
+      \fancyhf{} % Limpiar encabezado y pie de página
+
+
+
+
     }
 }
 
 \newcommand\mainMatter{%
     
+    \cleardoublepage
     \hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
     
     % Add the word "Chapters" in the TOC as per University requirements
     \addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Chapters}}\hfill\par} 
-    \cleardoublepage
     
-    % Page numbering in the top-right hand corner
-    \pagestyle{fancy}
-    \fancyhf{} % clear the fancy header
-    \lhead{} % nothing in the left corner
-    \rhead{\thepage} % page number in the top right corner
-    \renewcommand{\headrulewidth}{0pt} % hide the line at the top of the fancy header
+    % Configurar encabezado y pie de página con fancyhdr
+    \pagestyle{fancy} % Establecer el estilo fancyhdr
+    \fancyhf{} % Limpiar todos los campos de encabezado y pie de página
     
-    % Redefine the pagestyle plain because when \chapter{...} is evoked, 
-    % it ignores the current page style
-    \fancypagestyle{plain}{%
-      \renewcommand{\headrulewidth}{0pt}%
-      \fancyhf{} % University requirement that pages with chapter titles don't show numbers
-      %\fancyhead[R]{\thepage} % Uncomment to put page numbers on chapter title page
+    % Encabezado para páginas impares (recto)
+    % \fancyhead[LE]{\thepage}
+    \fancyfoot[LE]{\thepage} % Número de página a la derecha en páginas impares
+    
+
+
+
+
+
+    % Redefinir \chaptermark para evitar \protect\\ en encabezados
+    \makeatletter
+    \renewcommand{\chaptermark}[1]{%
+      \markboth{\thechapter.\ \nouppercase{#1}}{}}
+    \makeatother
+
+    % Encabezado para páginas pares (verso)
+    \fancyfoot[RO]{% Encabezado para páginas pares (verso)
+      \thepage \hspace{0.5em} % Número de página
     }
     
-    \pagenumbering{arabic} % University requirement (numbered pages)
-    \doublespacing % University requirement (Double spaced text)
+    \fancyhead[RE]{% Encabezado para páginas pares (verso)
+      \makebox[\textwidth][l]{% Hacer una caja para alinear a la derecha
+        \textit{Chapter \nouppercase{\leftmark}} % Nombre del capítulo en itálica
+      }%
+    }
+
+
+
+
+
+
+
+
+
+%    % Redefinir \leftmark para evitar \protect\\ en encabezados
+%    \makeatletter
+%    \renewcommand{\chaptermark}[1]{%
+%    \markboth{\thechapter.\ #1}{}}
+%    \makeatother
+%
+%    % Encabezado para páginas pares (verso)
+%    \fancyhead[LE]{\thepage \hspace{0.5em}} % Número de página
+%    \fancyhead[RE]{\textit{\nouppercase{\leftmark}}}
+
+    % Ocultar la línea de encabezado
+    % \renewcommand{\headrulewidth}{0pt}
+    
+    % Redefinir el estilo de página plain para capítulos u otras páginas sin estilo fancy
+    \fancypagestyle{plain}{%
+      \renewcommand{\headrulewidth}{0pt}%
+      \fancyhf{} % Limpiar encabezado y pie de página
+    }
+    
+    \pagenumbering{arabic} % Numeración arábiga para el cuerpo principal
+    \doublespacing % Doble espaciado requerido
 }
 
-%\RequirePackage[page,toc,titletoc,title]{appendix}
 
+%    % Page numbering in the top-right hand corner
+%    \pagestyle{fancy}
+%    \fancyhf{} % clear the fancy header
+%    \lhead{} % nothing in the left corner
+%    \rhead{\thepage} % page number in the top right corner
+%    \renewcommand{\headrulewidth}{0pt} % hide the line at the top of the fancy header
+%    
+%    % Redefine the pagestyle plain because when \chapter{...} is evoked, 
+%    % it ignores the current page style
+%    \fancypagestyle{plain}{%
+%      \renewcommand{\headrulewidth}{0pt}%
+%      \fancyhf{} % University requirement that pages with chapter titles don't show numbers
+%      %\fancyhead[R]{\thepage} % Uncomment to put page numbers on chapter title page
+%    }
+%    
+%    \pagenumbering{arabic} % University requirement (numbered pages)
+%    \doublespacing % University requirement (Double spaced text)
+%}
+
+
+% Configuración para la parte de backMatter (apéndices, bibliografía, etc.)
 \newcommand\backMatter{%
-    % Add the word "Appendices" in the TOC as per University requirements
+    % Añadir la palabra "Appendices" en el TOC según requisitos de la universidad
     \addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Appendices}}\hfill\par} 
-    %\cleardoublepage
+    \cleardoublepage
     
-    % Do not display sections/subsections/subsubsections/paragraphs/subparagraphs
-    %\addtocontents{toc}{\setcounter{tocdepth}{-10}}
+    % Mostrar marcadores en el PDF
+    \hypersetup{bookmarksdepth=5} 
     
-    \hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
-    
-    % Only display Appendix titles in TOC
+    % Solo mostrar títulos de apéndices en el TOC
     \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
     
-    % Create a new page for appendix chapters (Center the title on the page)
+    % Crear una nueva página para los capítulos de los apéndices
     \titlespacing{\chapter}
              {0in}
              {-\UofUOneInChapterSpace}
@@ -822,47 +932,121 @@
              
     \titleformat{\chapter}
         [display]
-        {\color{UOFURED}\centering\normalfont\Large\bfseries\doublespacing} % format
-        {\vspace*{\fill} \MakeUppercase{\chaptertitlename} \Large\thechapter} % label \vspace{\UofUHeadSpace} 
+        {\color{UOFURED}\centering\normalfont\Large\bfseries\doublespacing} % Formato del título del capítulo
+        {\vspace*{\fill} \MakeUppercase{\chaptertitlename} \Large\thechapter} % Etiqueta del título del capítulo
         {1ex}
         {\MakeUppercase}
         [\vspace*{\fill}\newpage]
     
-    \appendix
+    \appendix % Iniciar apéndices
 }
 
 
 
+%	%\RequirePackage[page,toc,titletoc,title]{appendix}
+%	
+%	\newcommand\backMatter{%
+%	    % Add the word "Appendices" in the TOC as per University requirements
+%	    \addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Appendices}}\hfill\par} 
+%	    %\cleardoublepage
+%	    
+%	    % Do not display sections/subsections/subsubsections/paragraphs/subparagraphs
+%	    %\addtocontents{toc}{\setcounter{tocdepth}{-10}}
+%	    
+%	    \hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
+%	    
+%	    % Only display Appendix titles in TOC
+%	    \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+%	    
+%	    % Create a new page for appendix chapters (Center the title on the page)
+%	    \titlespacing{\chapter}
+%	             {0in}
+%	             {-\UofUOneInChapterSpace}
+%	             {\UofUHeadSpace}
+%	             [0in]
+%	             
+%	    \titleformat{\chapter}
+%	        [display]
+%	        {\color{UOFURED}\centering\normalfont\Large\bfseries\doublespacing} % format
+%	        {\vspace*{\fill} \MakeUppercase{\chaptertitlename} \Large\thechapter} % label \vspace{\UofUHeadSpace} 
+%	        {1ex}
+%	        {\MakeUppercase}
+%	        [\vspace*{\fill}\newpage]
+%	    
+%	    \appendix
+%	}
+
+
+
+% Configuración posterior a los apéndices (si es necesario)
 \newcommand\postAppendix{%
     
     \makeatletter
     \@addtoreset{chapter}{part}
     \makeatother 
     
-    \hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
+    \hypersetup{bookmarksdepth=5} % Mostrar marcadores en el PDF
     
-    % Only display Appendix titles in TOC
+    % Solo mostrar títulos de apéndices en el TOC
     \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
     
-    % Page numbering in the top-right hand corner
+    % Configurar encabezado y pie de página con fancyhdr para el cuerpo principal
     \pagestyle{fancy}
-    \fancyhf{} % clear the fancy header
-    \lhead{} % nothing in the left corner
-    \rhead{\thepage} % page number in the top right corner
-    \renewcommand{\headrulewidth}{0pt} % hide the line at the top of the fancy header
+    \fancyhf{} % Limpiar todos los campos de encabezado y pie de página
     
-    % Redefine the pagestyle plain because when \chapter{...} is evoked, 
-    % it ignores the current page style
+    % Encabezado para páginas impares (recto)
+    \fancyhead[RO]{\thepage} % Número de página a la derecha en páginas impares
+    
+    % Encabezado para páginas pares (verso)
+    \fancyhead[LE]{\thepage} % Número de página a la izquierda en páginas pares
+    
+    % Ocultar la línea de encabezado
+    \renewcommand{\headrulewidth}{0pt}
+    
+    % Redefinir el estilo de página plain para capítulos u otras páginas sin estilo fancy
     \fancypagestyle{plain}{%
       \renewcommand{\headrulewidth}{0pt}%
-      \fancyhf{} % University requirement that pages with chapter titles don't show numbers
-      %\fancyhead[R]{\thepage} % Uncomment to put page numbers on chapter title page
+      \fancyhf{} % Limpiar encabezado y pie de página
     }
     
-    \pagenumbering{arabic} % University requirement (numbered pages)
-    \doublespacing % University requirement (Double spaced text)
-    
+    \pagenumbering{arabic} % Numeración arábiga para el cuerpo principal
+    \doublespacing % Doble espaciado requerido
 }
+
+
+
+
+
+%	\newcommand\postAppendix{%
+%	    
+%	    \makeatletter
+%	    \@addtoreset{chapter}{part}
+%	    \makeatother 
+%	    
+%	    \hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
+%	    
+%	    % Only display Appendix titles in TOC
+%	    \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+%	    
+%	    % Page numbering in the top-right hand corner
+%	    \pagestyle{fancy}
+%	    \fancyhf{} % clear the fancy header
+%	    \lhead{} % nothing in the left corner
+%	    \rhead{\thepage} % page number in the top right corner
+%	    \renewcommand{\headrulewidth}{0pt} % hide the line at the top of the fancy header
+%	    
+%	    % Redefine the pagestyle plain because when \chapter{...} is evoked, 
+%	    % it ignores the current page style
+%	    \fancypagestyle{plain}{%
+%	      \renewcommand{\headrulewidth}{0pt}%
+%	      \fancyhf{} % University requirement that pages with chapter titles don't show numbers
+%	      %\fancyhead[R]{\thepage} % Uncomment to put page numbers on chapter title page
+%	    }
+%	    
+%	    \pagenumbering{arabic} % University requirement (numbered pages)
+%	    \doublespacing % University requirement (Double spaced text)
+%	    
+%	}
 
 
 %----------------------------------------------------------------------%
@@ -873,21 +1057,24 @@
 
 \newcommand\tableOfContents{
     {
+    \pagestyle{empty}
     \hypersetup{linkcolor=blue} % Change color if you want something different
-    \clearpage
+    % \clearpage
     \pdfbookmark{Table of Contents}{toc} % Add bookmark to PDF
     \tableofcontents % Prints the main table of contents
     
-    \clearpage
+    % \clearpage
     \phantomsection
     \addcontentsline{toc}{chapter}{\uppercase{List of Figures}} % Adds to TOC
     \listoffigures % Prints the list of figures    
     
-    \clearpage
+    % \clearpage
     \phantomsection
     \addcontentsline{toc}{chapter}{\uppercase{List of Tables}} % Adds to TOC
     \listoftables % Prints the list of tables
     }
+    \clearpage
+    \thispagestyle{empty}
 }
 
 % turn off the error for \uppercase in chapter titles
