@@ -501,8 +501,7 @@
         \end{spacing}
     \end{minipage}
     \clearpage
-    \thispagestyle{empty}
-    }
+    \thispagestyle{empty}    }
 }
 
 
@@ -764,9 +763,10 @@
     % \cleardoublepage % Página en blanco antes de la página de derechos de autor (lado derecho)
     {
     % \thispagestyle{empty} % Sin numeración ni encabezado en la página de derechos de autor
-    \chapter*{Acknowledgements}
-    \addcontentsline{toc}{chapter}{\uppercase{Acknowledgements}}
+    \chapter*{Acknowledgments}
+    \addcontentsline{toc}{chapter}{\uppercase{Acknowledgments}}
     \hspace{\parindent}
+    \begin{doublespace}
         \@Acknowledgement
     \end{doublespace}
     }
@@ -861,12 +861,6 @@
 
 
 
-
-
-
-
-
-
 %    % Redefinir \leftmark para evitar \protect\\ en encabezados
 %    \makeatletter
 %    \renewcommand{\chaptermark}[1]{%
@@ -885,10 +879,9 @@
       \renewcommand{\headrulewidth}{0pt}%
       \fancyhf{} % Limpiar encabezado y pie de página
     }
-    
     \pagenumbering{arabic} % Numeración arábiga para el cuerpo principal
     \doublespacing % Doble espaciado requerido
-}
+
 
 
 %    % Page numbering in the top-right hand corner
