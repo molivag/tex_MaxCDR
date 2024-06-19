@@ -818,48 +818,76 @@
     }
 }
 %
+% The Original One
 %\newcommand\mainMatter{%
-%    
-%    \cleardoublepage
-%    \hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
-%    
-%    % Add the word "Chapters" in the TOC as per University requirements
-%    \addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Chapters}}\hfill\par} 
-%    
-%    % Configurar encabezado y pie de página con fancyhdr
-%    \pagestyle{fancy} % Establecer el estilo fancyhdr
-%    \fancyhf{} % Limpiar todos los campos de encabezado y pie de página
-%    
-%    % Encabezado para páginas impares (recto)
-%    % \fancyhead[LE]{\thepage}
-%    \fancyfoot[LE]{\thepage} % Número de página a la derecha en páginas impares
-%    
-%
-%    % Redefinir \chaptermark para evitar \protect\\ en encabezados
-%    \makeatletter
-%    \renewcommand{\chaptermark}[1]{%
-%    \markboth{\thechapter.\ \nouppercase{#1}}{}}
-%    \makeatother
-%
-		% Encabezado para páginas pares (verso)
-    	\fancyfoot[RO]{% Encabezado para páginas pares (verso)
-      	\thepage \hspace{0.5em} % Número de página
-    	}
-%    
-    	\fancyhead[RE]{% Encabezado para páginas pares (verso)
-      		\makebox[\textwidth][l]{% Hacer una caja para alinear a la derecha
-        		\textit{Chapter \nouppercase{\leftmark}} % Nombre del capítulo en itálica
-      		}
-    	}
-    % Redefinir \leftmark para evitar \protect\\ en encabezados
+	%	
+	%	\hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
+	%	
+	%	% Add the word "Chapters" in the TOC as per University requirements
+	%	\addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Chapters}}\hfill\par} 
+	%	\cleardoublepage
+	%	
+	%	% Page numbering in the top-right hand corner
+	%	\pagestyle{fancy}
+	%	\fancyhf{} % clear the fancy header
+	%	\lhead{} % nothing in the left corner
+	%	\rhead{\thepage} % page number in the top right corner
+	%	\renewcommand{\headrulewidth}{0pt} % hide the line at the top of the fancy header
+	%	
+	%	% Redefine the pagestyle plain because when \chapter{...} is evoked, 
+	%	% it ignores the current page style
+	%	\fancypagestyle{plain}{%
+		%		\renewcommand{\headrulewidth}{0pt}%
+		%		\fancyhf{} % University requirement that pages with chapter titles don't show numbers
+		%		%\fancyhead[R]{\thepage} % Uncomment to put page numbers on chapter title page
+		%	}
+	%	
+	%	\pagenumbering{arabic} % University requirement (numbered pages)
+	%	\doublespacing % University requirement (Double spaced text)
+	%}
+	%End OF THE ORIGINAL ONE
+
+\newcommand\mainMatter{    
+    \cleardoublepage
+    \hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
+    
+    % Add the word "Chapters" in the TOC as per University requirements
+    \addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Chapters}}\hfill\par} 
+    
+    % Configurar encabezado y pie de página con fancyhdr
+    \pagestyle{fancy} % Establecer el estilo fancyhdr
+    \fancyhf{} % Limpiar todos los campos de encabezado y pie de página
+    
+    % Encabezado para páginas impares (recto)
+    \fancyfoot[LE]{\thepage} % Número de página a la derecha en páginas impares
+    
+
+%     Redefinir \chaptermark para evitar \protect\\ en encabezados
     \makeatletter
-    \renewcommand{\chaptermark}[1]{%
-    \markboth{\thechapter.\ #1}{}}
+%    \renewcommand{\chaptermark}[1]{  \markboth{\thechapter.\ \nouppercase{##1}}{}  }
+    \renewcommand{\chaptermark}[1]{  \markboth{\thechapter.\ ##1}{}  }
     \makeatother
 
-    % Encabezado para páginas pares (verso)
-    \fancyhead[LE]{\thepage \hspace{0.5em}} % Número de página
-    \fancyhead[RE]{\textit{\nouppercase{\leftmark}}}
+		% Encabezado para páginas pares (verso)
+    	\fancyfoot[RO]{% Encabezado para páginas pares (verso)
+      	\thepage \hspace{05em}} % Número de página
+    	
+    	\fancyhead[LE]{\textit{\nouppercase{\leftmark}}}    	
+%    	\fancyhead[RE]{% Encabezado para páginas pares (verso)
+%      		\makebox[\textwidth][l]{% Hacer una caja para alinear a la derecha
+%        		\textit{\nouppercase{\leftmark}} % Nombre del capítulo en itálica
+%      		}
+%    	}
+
+
+    % Redefinir \leftmark para evitar \protect\\ en encabezados
+%    \makeatletter
+%    \renewcommand{\chaptermark}[1]{    \markboth{\thechapter.\ ##1}{} }
+%    \makeatother
+
+%    % Encabezado para páginas pares (verso)
+%    \fancyhead[LE]{\thepage \hspace{0.5em}} % Número de página
+%    \fancyhead[RE]{\textit{\nouppercase{\leftmark}}}
 
     % Ocultar la línea de encabezado
     % \renewcommand{\headrulewidth}{0pt}
@@ -872,23 +900,59 @@
     \pagenumbering{arabic} % Numeración arábiga para el cuerpo principal
     \doublespacing % Doble espaciado requerido
 
-	% Page numbering in the top-right hand corner
-    \pagestyle{fancy}
-    \fancyhf{} % clear the fancy header
-    \lhead{} % nothing in the left corner
-    \rhead{\thepage} % page number in the top right corner
-    \renewcommand{\headrulewidth}{0pt} % hide the line at the top of the fancy header
-    
-    % Redefine the pagestyle plain because when \chapter{...} is evoked, 
-    % it ignores the current page style
-    \fancypagestyle{plain}{%
-      \renewcommand{\headrulewidth}{0pt}%
-      \fancyhf{} % University requirement that pages with chapter titles don't show numbers
-      %\fancyhead[R]{\thepage} % Uncomment to put page numbers on chapter title page
-    }
-    
-    \pagenumbering{arabic} % University requirement (numbered pages)
-    \doublespacing % University requirement (Double spaced text)
+}
+
+
+%THE MODIFIED ONE WITHOUT COMMENTS
+
+%\newcommand\mainMatter{    
+%	\cleardoublepage
+%	\hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
+%	
+%	% Add the word "Chapters" in the TOC as per University requirements
+%	\addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Chapters}}\hfill\par} 
+%	
+%	% Configurar encabezado y pie de página con fancyhdr
+%	\pagestyle{fancy} % Establecer el estilo fancyhdr
+%	\fancyhf{} % Limpiar todos los campos de encabezado y pie de página
+%	
+%	% Encabezado para páginas impares (recto)
+%	\fancyfoot[LE]{\thepage} % Número de página a la derecha en páginas impares
+%	
+%	%Redefinir \chaptermark para evitar \protect\\ en encabezados
+%	\makeatletter
+%	\renewcommand{\chaptermark}[1]{  \markboth{\thechapter.\ ##1}{}  }
+%	\makeatother
+%	
+%	% Encabezado para páginas pares (verso)
+%	\fancyfoot[RO]{% Encabezado para páginas pares (verso)
+%		\thepage \hspace{05em}} % Número de página
+%	\fancyhead[LE]{\textit{\nouppercase{\leftmark}}}    	
+%	
+%	% Redefinir el estilo de página plain para capítulos u otras páginas sin estilo fancy
+%	\fancypagestyle{plain}{%
+%		\renewcommand{\headrulewidth}{0pt}%
+%		\fancyhf{} % Limpiar encabezado y pie de página
+%	}
+%	\pagenumbering{arabic} % Numeración arábiga para el cuerpo principal
+%	\doublespacing % Doble espaciado requerido
+%	
+%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 % Configuración para la parte de backMatter (apéndices, bibliografía, etc.)
