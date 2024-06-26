@@ -378,7 +378,7 @@
 \RequirePackage{doi} % DOI field in references
 \RequirePackage{url} % URL allowed to split up
 
-\RequirePackage[anythingbreaks]{breakurl} % breaks URLs with the "\burl{xxxx@xxxxx.com}"  (After hyperref)
+% \RequirePackage[anythingbreaks]{breakurl} % breaks URLs with the "\burl{xxxx@xxxxx.com}"  (After hyperref)
 
 % Use capitalization of all references 
 \RequirePackage[capitalise,noabbrev,nameinlink]{cleveref} % Needs to be loaded after hyperref
@@ -820,32 +820,31 @@
 %
 % The Original One
 %\newcommand\mainMatter{%
-	%	
-	%	\hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
-	%	
-	%	% Add the word "Chapters" in the TOC as per University requirements
-	%	\addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Chapters}}\hfill\par} 
-	%	\cleardoublepage
-	%	
-	%	% Page numbering in the top-right hand corner
-	%	\pagestyle{fancy}
-	%	\fancyhf{} % clear the fancy header
-	%	\lhead{} % nothing in the left corner
-	%	\rhead{\thepage} % page number in the top right corner
-	%	\renewcommand{\headrulewidth}{0pt} % hide the line at the top of the fancy header
-	%	
-	%	% Redefine the pagestyle plain because when \chapter{...} is evoked, 
-	%	% it ignores the current page style
-	%	\fancypagestyle{plain}{%
-		%		\renewcommand{\headrulewidth}{0pt}%
-		%		\fancyhf{} % University requirement that pages with chapter titles don't show numbers
-		%		%\fancyhead[R]{\thepage} % Uncomment to put page numbers on chapter title page
-		%	}
-	%	
-	%	\pagenumbering{arabic} % University requirement (numbered pages)
-	%	\doublespacing % University requirement (Double spaced text)
-	%}
-	%End OF THE ORIGINAL ONE
+%		\hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
+		
+%		% Add the word "Chapters" in the TOC as per University requirements
+%		\addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Chapters}}\hfill\par} 
+%		\cleardoublepage
+		
+%		% Page numbering in the top-right hand corner
+%		\pagestyle{fancy}
+%		\fancyhf{} % clear the fancy header
+%		\lhead{} % nothing in the left corner
+%		\rhead{\thepage} % page number in the top right corner
+%		\renewcommand{\headrulewidth}{0pt} % hide the line at the top of the fancy header
+		
+%		% Redefine the pagestyle plain because when \chapter{...} is evoked, 
+%		% it ignores the current page style
+%		\fancypagestyle{plain}{%
+%				\renewcommand{\headrulewidth}{0pt}%
+%				\fancyhf{} % University requirement that pages with chapter titles don't show numbers
+%				%\fancyhead[R]{\thepage} % Uncomment to put page numbers on chapter title page
+%			}
+		
+%		\pagenumbering{arabic} % University requirement (numbered pages)
+%		\doublespacing % University requirement (Double spaced text)
+%	}
+%	%End OF THE ORIGINAL ONE
 
 
 
@@ -855,50 +854,45 @@
 
 
 
-\newcommand\mainMatter{    
-	\cleardoublepage
-	\hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
+% \newcommand\mainMatter{    
+% 	\cleardoublepage
+% 	\hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
 	
-	% Add the word "Chapters" in the TOC as per University requirements
-	\addtocontents{toc}{\vspace{1em}\noindent{\bfseries\uppercase{Chapters}}\hfill\par} 
+% 	% Add the word "Chapters" in the TOC as per University requirements
+% 	\addtocontents{toc}{\vspace{1em}\noindent{\bfseries\uppercase{Chapters}}\hfill\par} 
 	
-	% Configurar encabezado y pie de página con fancyhdr
-	\pagestyle{fancy} % Establecer el estilo fancyhdr
-	\fancyhf{} % Limpiar todos los campos de encabezado y pie de página
+% 	% Configurar encabezado y pie de página con fancyhdr
+% 	\pagestyle{fancy} % Establecer el estilo fancyhdr
+% 	\fancyhf{} % Limpiar todos los campos de encabezado y pie de página
 	
-	% Encabezado para páginas impares (recto)
-	\fancyfoot[LE]{\thepage} % Número de página a la derecha en páginas impares
+% 	% Encabezado para páginas impares (recto)
+% 	\fancyfoot[LE]{\thepage} % Número de página a la derecha en páginas impares
 	
-	% Redefinir \chaptermark para evitar \protect\\ en encabezados
-	\makeatletter
-	\renewcommand{\chaptermark}[1]{%
-		\markboth{\thechapter.\ \@gobble##1}{}%
-	}
-	\makeatother
+% 	% Redefinir \chaptermark para evitar \protect\\ en encabezados
+% 	\makeatletter
+% 	\renewcommand{\chaptermark}[1]{%
+% 		\markboth{Chapter \thechapter.\ \@gobble##1}{}%
+% 	}
+% 	\makeatother
 	
-	% Encabezado para páginas pares (verso)
-	\fancyfoot[RO]{\thepage \hspace{0.5em}} % Número de página
-	\fancyhead[LE]{\textit{\nouppercase{\leftmark}}}    
+% 	% Encabezado para páginas pares (verso)
+% 	\fancyfoot[RO]{\thepage \hspace{0.5em}} % Número de página
+% 	\fancyhead[LE]{\textit{\nouppercase{\leftmark}}}    
 	
-	% Redefinir el estilo de página plain para capítulos u otras páginas sin estilo fancy
-	\fancypagestyle{plain}{%
-		\renewcommand{\headrulewidth}{0pt}%
-		\fancyhf{} % Limpiar encabezado y pie de página
-	}
+% 	% Redefinir el estilo de página plain para capítulos u otras páginas sin estilo fancy
+% 	\fancypagestyle{plain}{%
+% 		\renewcommand{\headrulewidth}{0pt}%
+% 		\fancyhf{} % Limpiar encabezado y pie de página
+% 	}
 	
-	\pagenumbering{arabic} % Numeración arábiga para el cuerpo principal
-	\doublespacing % Doble espaciado requerido
-}
+% 	\pagenumbering{arabic} % Numeración arábiga para el cuerpo principal
+% 	\doublespacing % Doble espaciado requerido
+% }
 
-% Definir \@gobble para eliminar \protect\\
-\makeatletter
-\def\@gobble#1{}
-\makeatother
-
-
-
-
-
+% % Definir \@gobble para eliminar \protect\\
+% \makeatletter
+% \def\@gobble#1{}
+% \makeatother
 
 
 
@@ -909,39 +903,39 @@
 
 %THE MODIFIED ONE WITHOUT COMMENTS
 
-%\newcommand\mainMatter{    
-%	\cleardoublepage
-%	\hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
-%	
-%	% Add the word "Chapters" in the TOC as per University requirements
-%	\addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Chapters}}\hfill\par} 
-%	
-%	% Configurar encabezado y pie de página con fancyhdr
-%	\pagestyle{fancy} % Establecer el estilo fancyhdr
-%	\fancyhf{} % Limpiar todos los campos de encabezado y pie de página
-%	
-%	% Encabezado para páginas impares (recto)
-%	\fancyfoot[LE]{\thepage} % Número de página a la derecha en páginas impares
-%	
-%	%Redefinir \chaptermark para evitar \protect\\ en encabezados
-%	\makeatletter
-%	\renewcommand{\chaptermark}[1]{  \markboth{\thechapter.\ ##1}{}  }
-%	\makeatother
-%	
-%	% Encabezado para páginas pares (verso)
-%	\fancyfoot[RO]{% Encabezado para páginas pares (verso)
-%		\thepage \hspace{05em}} % Número de página
-%	\fancyhead[LE]{\textit{\nouppercase{\leftmark}}}    	
-%	
-%	% Redefinir el estilo de página plain para capítulos u otras páginas sin estilo fancy
-%	\fancypagestyle{plain}{%
-%		\renewcommand{\headrulewidth}{0pt}%
-%		\fancyhf{} % Limpiar encabezado y pie de página
-%	}
-%	\pagenumbering{arabic} % Numeración arábiga para el cuerpo principal
-%	\doublespacing % Doble espaciado requerido
-%	
-%}
+\newcommand\mainMatter{    
+	\cleardoublepage
+	\hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
+	
+	% Add the word "Chapters" in the TOC as per University requirements
+	\addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Chapters}}\hfill\par} 
+	
+	% Configurar encabezado y pie de página con fancyhdr
+	\pagestyle{fancy} % Establecer el estilo fancyhdr
+	\fancyhf{} % Limpiar todos los campos de encabezado y pie de página
+	
+	% Encabezado para páginas impares (recto)
+	\fancyfoot[LE]{\thepage} % Número de página a la derecha en páginas impares
+	
+	%Redefinir \chaptermark para evitar \protect\\ en encabezados
+	\makeatletter
+	\renewcommand{\chaptermark}[1]{  \markboth{\thechapter.\ ##1}{}  }
+	\makeatother
+	
+	% Encabezado para páginas pares (verso)
+	\fancyfoot[RO]{% Encabezado para páginas pares (verso)
+		\thepage \hspace{05em}} % Número de página
+	\fancyhead[LE]{\textit{\nouppercase{\leftmark}}}    	
+	
+	% Redefinir el estilo de página plain para capítulos u otras páginas sin estilo fancy
+	\fancypagestyle{plain}{%
+		\renewcommand{\headrulewidth}{0pt}%
+		\fancyhf{} % Limpiar encabezado y pie de página
+	}
+	\pagenumbering{arabic} % Numeración arábiga para el cuerpo principal
+	\doublespacing % Doble espaciado requerido
+	
+}
 
 
 
@@ -960,69 +954,69 @@
 
 
 % Configuración para la parte de backMatter (apéndices, bibliografía, etc.)
-\newcommand\backMatter{%
-    % Añadir la palabra "Appendices" en el TOC según requisitos de la universidad
-    \addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Appendices}}\hfill\par} 
-    \cleardoublepage
-    
-    % Mostrar marcadores en el PDF
-    \hypersetup{bookmarksdepth=5} 
-    
-    % Solo mostrar títulos de apéndices en el TOC
-    \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
-    
-    % Crear una nueva página para los capítulos de los apéndices
-    \titlespacing{\chapter}
-             {0in}
-             {-\UofUOneInChapterSpace}
-             {\UofUHeadSpace}
-             [0in]
-             
-    \titleformat{\chapter}
-        [display]
-        {\color{UOFURED}\centering\normalfont\Large\bfseries\doublespacing} % Formato del título del capítulo
-        {\vspace*{\fill} \MakeUppercase{\chaptertitlename} \Large\thechapter} % Etiqueta del título del capítulo
-        {1ex}
-        {\MakeUppercase}
-        [\vspace*{\fill}\newpage]
-    
-    \appendix % Iniciar apéndices
-}
+%\newcommand\backMatter{%
+%    % Añadir la palabra "Appendices" en el TOC según requisitos de la universidad
+%    \addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Appendices}}\hfill\par} 
+%    \cleardoublepage
+%    
+%    % Mostrar marcadores en el PDF
+%    \hypersetup{bookmarksdepth=5} 
+%    
+%    % Solo mostrar títulos de apéndices en el TOC
+%    \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+%    
+%    % Crear una nueva página para los capítulos de los apéndices
+%    \titlespacing{\chapter}
+%             {0in}
+%             {-\UofUOneInChapterSpace}
+%             {\UofUHeadSpace}
+%             [0in]
+%             
+%    \titleformat{\chapter}
+%        [display]
+%        {\color{UOFURED}\centering\normalfont\Large\bfseries\doublespacing} % Formato del título del capítulo
+%        {\vspace*{\fill} \MakeUppercase{\chaptertitlename} \Large\thechapter} % Etiqueta del título del capítulo
+%        {1ex}
+%        {\MakeUppercase}
+%        [\vspace*{\fill}\newpage]
+%    
+%    \appendix % Iniciar apéndices
+%}
 
 
 
-%	%\RequirePackage[page,toc,titletoc,title]{appendix}
-%	
-%	\newcommand\backMatter{%
-%	    % Add the word "Appendices" in the TOC as per University requirements
-%	    \addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Appendices}}\hfill\par} 
-%	    %\cleardoublepage
-%	    
-%	    % Do not display sections/subsections/subsubsections/paragraphs/subparagraphs
-%	    %\addtocontents{toc}{\setcounter{tocdepth}{-10}}
-%	    
-%	    \hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
-%	    
-%	    % Only display Appendix titles in TOC
-%	    \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
-%	    
-%	    % Create a new page for appendix chapters (Center the title on the page)
-%	    \titlespacing{\chapter}
-%	             {0in}
-%	             {-\UofUOneInChapterSpace}
-%	             {\UofUHeadSpace}
-%	             [0in]
-%	             
-%	    \titleformat{\chapter}
-%	        [display]
-%	        {\color{UOFURED}\centering\normalfont\Large\bfseries\doublespacing} % format
-%	        {\vspace*{\fill} \MakeUppercase{\chaptertitlename} \Large\thechapter} % label \vspace{\UofUHeadSpace} 
-%	        {1ex}
-%	        {\MakeUppercase}
-%	        [\vspace*{\fill}\newpage]
-%	    
-%	    \appendix
-%	}
+	%\RequirePackage[page,toc,titletoc,title]{appendix}
+	
+	\newcommand\backMatter{%
+	    % Add the word "Appendices" in the TOC as per University requirements
+	    \addtocontents{toc}{\vspace{1em}\noindent{\bf\uppercase{Appendices}}\hfill\par} 
+	    %\cleardoublepage
+	    
+	    % Do not display sections/subsections/subsubsections/paragraphs/subparagraphs
+	    %\addtocontents{toc}{\setcounter{tocdepth}{-10}}
+	    
+	    \hypersetup{bookmarksdepth=5} % Display bookmarks in PDF
+	    
+	    % Only display Appendix titles in TOC
+	    \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+	    
+	    % Create a new page for appendix chapters (Center the title on the page)
+	    \titlespacing{\chapter}
+	             {0in}
+	             {-\UofUOneInChapterSpace}
+	             {\UofUHeadSpace}
+	             [0in]
+	             
+	    \titleformat{\chapter}
+	        [display]
+	        {\color{UOFURED}\centering\normalfont\Large\bfseries\doublespacing} % format
+	        {\vspace*{\fill} \MakeUppercase{\chaptertitlename} \Large\thechapter} % label \vspace{\UofUHeadSpace} 
+	        {1ex}
+	        {\MakeUppercase}
+	        [\vspace*{\fill}\newpage]
+	    
+	    \appendix
+	}
 
 
 
