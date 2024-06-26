@@ -1,1 +1,35 @@
+## Core latex/pdflatex auxiliary files:
 .DS_Store
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+*.lb
+*.pygtex
+
+
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+# *.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+# *.bbl-SAVE-ERROR
+# *.bcf-SAVE-ERROR
+
+## Build tool auxiliary files:
+*.fdb_latexmk
+*.synctex.gz
+
+## todonotes
+*.tdo
+
+
