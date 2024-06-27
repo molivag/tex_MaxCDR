@@ -9,22 +9,23 @@
     % Needs to be capitalized (University Rules) and title width is no longer
     % than 4.5 inches.  Specify custom line breaks using "\protect\\" for both
     % the Chapter title page and the table of contents page
-    \chapter[\uppercase{Back Analysis of Numerical Algorithm}]{\uppercase{Back Analysis of Numerical Algorithm}}\label{chp:4}
-    
-    
+    \chapter[\uppercase{Code Design and Structure}]{\uppercase{Code Design and Structure}}
+    \label{chp:4}
+      \lipsum[1] % random text after the chapter title.  
     % If there is no text between the chapter and the first section, then we 
     % need to reduce the spacing with a negative skip.  Otherwise, comment out
     % the following line
-    \vspace{-2ex}
+    % \vspace{-2ex}
     
-    \subfile{0_Introduction}
-    \subfile{1_Math_Tools}
-    \subfile{2_Boundary_Layer}
-    \subfile{3_Cavity_Driven_Flow}
-    \subfile{4_Discussion}
-    \subfile{5_Conclusion}
-    \subfile{6_Acknowledgment}
+    \subfile{4_1_Overview}
+    \subfile{4_2_Preprocess}
+    \subfile{4_3_Solver_Pack}
+    \subfile{4_4_Postprocess}
+    % \subfile{4_5_Discussion}
+    % \subfile{4_6_Conclusion} 
     
+
+
     % bibliography
     \printbibliography[segment=\therefsegment,heading=references]
     
