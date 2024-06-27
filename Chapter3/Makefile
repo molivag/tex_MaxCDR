@@ -1,7 +1,7 @@
 # Linux Makefile to create a final pdf of the project
 
 # Variables
-CHAPTER =      Chapter3
+CHAPTER =      Chapter2
 ABSTRACT =     0_Abstract
 INTRODUCTION = 1_Introduction
 METHODS =      2_Methods
