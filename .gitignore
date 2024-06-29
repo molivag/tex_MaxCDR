@@ -13,10 +13,10 @@
 *.cb2
 *.lb
 *.pygtex
-
+*.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
-# *.bbl
+*.bbl
 *.bcf
 *.blg
 *-blx.aux
@@ -32,4 +32,9 @@
 ## todonotes
 *.tdo
 
+##
+_minted-Dissertation/
+# Chapter2/_minted-2_Methods/
 
+#token
+token_thesis.txt
